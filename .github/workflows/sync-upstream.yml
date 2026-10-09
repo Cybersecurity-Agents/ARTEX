@@ -1,0 +1,39 @@
+name: Sync upstream
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync default branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          upstream=$(gh api "repos/$REPOSITORY" --jq '.parent.full_name // empty')
+          branch=$(gh api "repos/$REPOSITORY" --jq '.default_branch')
+
+          if [ -z "$upstream" ]; then
+            echo "No upstream fork relationship found."
+            exit 1
+          fi
+
+          gh api "repos/$upstream" >/dev/null
+
+          gh api \
+            --method POST \
+            "repos/$REPOSITORY/merge-upstream" \
+            -f "branch=$branch"
