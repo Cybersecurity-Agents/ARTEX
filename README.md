@@ -2,57 +2,66 @@
 
 # ARTEX
 
-AI 自主渗透测试系统（Go 后端 + Next.js 前端）
+面向企业攻击面的自主渗透测试智能体（Go 后端 + Next.js 前端）
 
+🏆 **2026 年 9 月 3 日 · 百度安全「Agent+」攻防能力挑战赛 冠军**
 
-🌐 **在线 Demo（模拟数据）**： [https://artex-demo.mhtsec.com](https://artex-demo.mhtsec.com)
-
-📦 **该仓库为ARTEX最后一个版本纯源码备份。原 Docker 镜像源 `autumn27/artex` 已失效，现由本仓库自维护镜像 `mianhuatang11/artex`（Docker Hub）；拉取失败时可 `docker compose build` 从纯源码本地构建，无任何外部预编译依赖。**
+🌐 **在线 Demo（模拟数据）**： <https://artex-demo.mhtsec.com>
 
 </div>
 
 ---
 
-## 截图预览
+## 项目背景
 
-> 完整交互见[在线 Demo](https://artex-demo.mhtsec.com)（纯前端 + Mock 数据，无需后端）。
+**Artex Pro（企业版）/ ARTEX（开源版）** 是面向企业攻击面的自主渗透测试智能体，为微步 RedAgents 产品负责人的个人项目。
 
-| 仪表盘（总览 / Token 消耗 / 活动流） | 任务列表 |
-| :---: | :---: |
-| ![仪表盘](screenshots/dashboard.png) | ![任务](screenshots/tasks.png) |
+- **Artex Pro（企业版）** 重点提升了安全管控能力：以工程化思路将自主智能体构建为一套完整的红队系统，不止能自主突破和发现漏洞，还能做到**全程可控、运行稳定、结果可追溯**。
+- **ARTEX（开源版）** 此前作为开源项目运营，于 **2026 年 9 月 3 日** 在百度安全「Agent+」攻防能力挑战赛中斩获**冠军**；后被攻击者恶意利用、引发国外多起大规模金融行业安全事件，已于 **2026 年 10 月 8 日** 宣布**正式转为闭源**。
 
-| 任务 · 执行过程（会话 / 工具调用） | 探索链路 |
-| :---: | :---: |
-| ![执行过程](screenshots/sessions.png) | ![探索链路](screenshots/graph.png) |
+### 关于本仓库
 
-| 发现 | 资产 |
-| :---: | :---: |
-| ![发现](screenshots/findings.png) | ![资产](screenshots/assets.png) |
+本仓库是 ARTEX 开源版闭源前**最后一个版本的纯源码备份**，后续由 **棉花糖**（[@mhtsec](https://github.com/mhtsec)，公众号 **棉花糖fans**）维护，欢迎参与共建：
 
-| 资产覆盖图（力导向布局 · 已测高亮 · 节点折叠展开） |
-| :---: |
-| ![资产覆盖图](screenshots/assets_test.png) |
+- 🐛 问题反馈 / 功能建议：[提交 Issue](https://github.com/mhtsec/ARTEX/issues)
+- 🛠 代码共建：欢迎提交 [Pull Request](https://github.com/mhtsec/ARTEX/pulls)
+- 💬 交流群：见文末 [交流与社区](#交流与社区)
 
-| 流量录制 | 人在环路对话 |
-| :---: | :---: |
-| ![流量](screenshots/traffic.png) | ![对话](screenshots/chat.png) |
-
-| Agent 管理 | LLM 配置 |
-| :---: | :---: |
-| ![Agent](screenshots/agents.png) | ![LLM](screenshots/llm.png) |
-
-| 拦截审批 | 后端日志 |
-| :---: | :---: |
-| ![拦截](screenshots/intercept.png) | ![日志](screenshots/logs.png) |
-
+> 原 Docker 镜像源 `autumn27/artex` 已失效，现由本仓库自维护镜像 `mianhuatang11/artex`（Docker Hub）；拉取失败时可 `docker compose build` 从纯源码本地构建，无任何外部预编译依赖。
+>
+> 致谢原作者的开源贡献：原作者微信公众号为 **SecSentry**，原项目地址 [Autumn-27/ARTEX](https://github.com/Autumn-27/ARTEX)。
 
 ---
 
-## 审批记录详情
+## 截图预览
 
-全局「审批记录」、任务内「拦截审批」及对话中的审批卡片均支持展开查看详情。展示结构参考
-[AegisHook 的审批详情组件](https://github.com/RuoJi6/AegisHook/blob/main/web/src/components/CallDetail.vue)，沿用 ARTEX 的组件和主题：
+> 完整交互见[在线 Demo](https://artex-demo.mhtsec.com)。
 
+| 仪表盘（总览 / Token 消耗 / 活动流） | 任务列表 |
+| :----------------------: | :--: |
+|            仪表盘           |  任务  |
+
+| 任务 · 执行过程（会话 / 工具调用） | 探索链路 |
+| :------------------: | :--: |
+|         执行过程         | 探索链路 |
+
+|  发现 |  资产 |
+| :-: | :-: |
+|  发现 |  资产 |
+
+| 流量录制 | 人在环路对话 |
+| :--: | :----: |
+|  流量  |   对话   |
+
+| Agent 管理 | LLM 配置 |
+| :------: | :----: |
+|   Agent  |   LLM  |
+
+| 拦截审批 | 后端日志 |
+| :--: | :--: |
+|  拦截  |  日志  |
+
+---
 
 ## 资产同步（ScopeSentry）
 
@@ -81,7 +90,7 @@ cd ARTEX
 - **① 全部 Docker**：填一个 Postgres 密码（可回车随机）→ 自动写 `.env` → `docker compose up -d`。
 - **② 本地运行**：选数据库（连已有 / 用 Docker 起一个）→ 生成 `config.json` → `go` 编译内嵌单二进制 → 启动。
 
-装好后打开 **http://localhost:8787**（首次进入 `/setup` 设置管理员密码）。
+装好后打开 \*\*<http://localhost:8787\*\*（首次进入> `/setup` 设置管理员密码）。
 
 ### 方式二：Docker Compose（手动）
 
@@ -93,15 +102,15 @@ docker compose up -d          # 拉取 mianhuatang11/artex 镜像 + postgres
 # → http://localhost:8787
 ```
 
-> 原镜像源 `autumn27/artex` 已从 Docker Hub 删除，镜像现由本仓库自维护为 **`mianhuatang11/artex`**。
-> 镜像源不可用（或想自行改代码）时，本地从纯源码构建即可：`docker compose build && docker compose up -d`。
+> 原镜像源 `autumn27/artex` 已从 Docker Hub 删除，镜像现由本仓库自维护为 **`mianhuatang11/artex`**。  
+> 镜像源不可用（或想自行改代码）时，本地从纯源码构建即可：`docker compose build && docker compose up -d`。  
 > Dockerfile 为多阶段构建（前端静态导出 → Go 静态编译 → 运行镜像），默认走国内友好依赖源，可加 `--build-arg GOPROXY=... / --build-arg NPM_REGISTRY=...` 覆盖。
 
 镜像已含常用工具（ripgrep/curl/vim/npm/nmap…）；`./skills` 与 `./data` 以绑定挂载持久化。
 
-远程 MCP 可在系统设置中选择 `http`（Streamable HTTP）或 `sse`（旧版 SSE）。
-旧版 SSE 服务通常使用 `GET /sse` 建立事件流，再通过服务返回的
-`/message?sessionId=...` 接收 JSON-RPC 请求；配置时将 URL 填为 `/sse`，请求头按
+远程 MCP 可在系统设置中选择 `http`（Streamable HTTP）或 `sse`（旧版 SSE）。  
+旧版 SSE 服务通常使用 `GET /sse` 建立事件流，再通过服务返回的  
+`/message?sessionId=...` 接收 JSON-RPC 请求；配置时将 URL 填为 `/sse`，请求头按  
 `Authorization=Bearer <token>` 填写。
 
 ### 方式三：下载预编译二进制（Releases）
@@ -113,7 +122,7 @@ cp config.example.json config.json   # 填好 database 连接
 ./start.sh                           # → http://localhost:8787
 ```
 
-> 请用 `start.sh` / `start.bat` 启动，而不是直接跑 `./artex`。它是个守护脚本：程序退出后按退出码决定是否重新拉起，**页面上的[一键更新](#方式一页面一键更新推荐)靠它完成换装**。直接运行 `./artex` 时更新完就不会被拉起了。
+> 请用 `start.sh` / `start.bat` 启动，而不是直接跑 `./artex`。它是个守护脚本：程序退出后按退出码决定是否重新拉起，**页面上的[一键更新](#方式一页面一键更新推荐)靠它完成换装**。直接运行 `./artex` 时更新完就不会被拉起了。  
 > 后台常驻：`nohup ./start.sh >artex.log 2>&1 &`。
 
 ### 方式四：从源码编译单二进制
@@ -221,7 +230,7 @@ CGO_ENABLED=0 go build -tags embedui -o artex ./cmd/artex
 }
 ```
 
-**LLM**：`export ANTHROPIC_API_KEY=sk-...`（或 `OPENAI_API_KEY`），也可在 UI 的「LLM 配置」页填写。
+**LLM**：`export ANTHROPIC_API_KEY=sk-...`（或 `OPENAI_API_KEY`），也可在 UI 的「LLM 配置」页填写。  
 可选：`ARTEX_LLM_PROVIDER` / `ARTEX_LLM_MODEL` / `ARTEX_LLM_BASE_URL` / `ARTEX_LLM_PROXY`。
 
 **并发**：每个任务的 work agent 数在「系统设置」里配置（默认 3）。
@@ -258,8 +267,6 @@ server {
 > 仅当 SSE 需要走与页面不同的来源（如独立子域）时，才在**构建期**设置 `NEXT_PUBLIC_SSE_BASE`（该变量在 `next build` 时固化进静态包，容器运行时再设无效）。
 
 ---
-
-
 
 ## 开发
 
@@ -341,6 +348,7 @@ flowchart TB
   WK -.-> EXT
   MA -.-> EXT
 ```
+
 
 | 层 | 职责 |
 | --- | --- |
@@ -461,15 +469,29 @@ flowchart TB
 
 ---
 
-## 交流群
+## 项目文档
 
-扫码关注微信公众号 **SecSentry**，在公众号后台私信即可入群交流。
+- [架构复核与演进设计](docs/架构复核与演进设计.md)：复核后的可靠性设计，明确先审计、再加固完成权限、图事务与规划恢复，随后接入四道门。
+- [问题驱动的实验搜索架构](docs/问题驱动的实验搜索架构.md)：以现有 Planner 加四道门为主方案，规定独立控制器的必要条件、残余失败样本和四组对照验收。
+- [创新路线与版本规划](docs/创新路线/README.md)：M0—M4 实施顺序与六条能力方向；R05 作为公共基础，R02 优先，R03 先做可达性，R01/R06 随依据与复测推进，R04 后置。新增机制均为待实施设计。
+
+---
+
+## 交流与社区
+
+本仓库后续由 **棉花糖** 持续维护，欢迎通过以下方式交流共建：
+
+- 🐛 **问题反馈 / 功能建议**：[提交 Issue](https://github.com/mhtsec/ARTEX/issues)
+- 🛠 **代码共建**：欢迎提交 [Pull Request](https://github.com/mhtsec/ARTEX/pulls)
+- 💬 **交流群**：扫码关注微信公众号 **棉花糖fans**，在**菜单栏点击「找棉花糖」**加好友，添加后发送 **「ARTEX」** 即可受邀进群
 
 <div align="center">
 
-<img src="screenshots/wx.png" alt="微信公众号 SecSentry" width="480" />
+<img src="screenshots/wx_mhtsec.png" alt="微信公众号 棉花糖fans" width="560" />
 
 </div>
+
+> 本仓库以备份形式延续原作者的开源贡献，特此致谢（原作者微信公众号：**SecSentry**）。
 
 ---
 ## 参考
