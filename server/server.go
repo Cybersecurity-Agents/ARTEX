@@ -1615,9 +1615,17 @@ func parseTarget(text string) (scheme, host string, port int, ok bool) {
 			return scheme, host, port, true
 		}
 	}
-	if m := reIPPort.FindStringSubmatch(text); m != nil {
-		host = m[1]
-		port = portOr(m[2], 80)
+	for _, m := range reIPPort.FindAllStringSubmatchIndex(text, -1) {
+		hs, he := m[2], m[3]
+		if !standaloneIP(text, hs, he) {
+			continue
+		}
+		portStr := ""
+		if m[4] >= 0 {
+			portStr = text[m[4]:m[5]]
+		}
+		host = text[hs:he]
+		port = portOr(portStr, 80)
 		return schemeForPort(port), host, port, true
 	}
 	if m := reDomain.FindStringSubmatch(text); m != nil {
@@ -1632,10 +1640,26 @@ func parseTarget(text string) (scheme, host string, port int, ok bool) {
 }
 
 func portOr(s string, d int) int {
-	if n, err := strconv.Atoi(s); err == nil && n > 0 {
+	if n, err := strconv.Atoi(s); err == nil && n > 0 && n <= 65535 {
 		return n
 	}
 	return d
+}
+
+// standaloneIP reports whether text[hs:he] is a well-formed IPv4 literal that
+// stands on its own: every octet in 0-255, and not embedded in a longer
+// dotted/numeric run, so version-like text ("1.2.3.4.5", "1.2.3.4444") and
+// out-of-range quads ("999.999.999.999") never seed a target asset.
+func standaloneIP(text string, hs, he int) bool {
+	if hs > 0 && text[hs-1] == '.' {
+		return false
+	}
+	if he < len(text) {
+		if c := text[he]; c == '.' || (c >= '0' && c <= '9') {
+			return false
+		}
+	}
+	return net.ParseIP(text[hs:he]) != nil
 }
 func defaultPort(scheme string) int {
 	if scheme == "http" {
