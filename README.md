@@ -4,8 +4,6 @@
 
 面向企业攻击面的自主渗透测试智能体（Go 后端 + Next.js 前端）
 
-🏆 **2026 年 9 月 3 日 · 百度安全「Agent+」攻防能力挑战赛 冠军**
-
 🌐 **在线 Demo（模拟数据）**： <https://artex-demo.mhtsec.com>
 
 </div>
