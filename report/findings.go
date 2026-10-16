@@ -77,7 +77,8 @@ func FindingsMarkdown(fs []*db.DBFinding, generatedAt time.Time) string {
 			fmt.Fprintf(&b, "%s\n\n", s)
 		}
 		if e := strings.TrimSpace(f.Evidence); e != "" {
-			fmt.Fprintf(&b, "**证据：**\n\n```\n%s\n```\n\n", e)
+			fence := fenceFor(e)
+			fmt.Fprintf(&b, "**证据：**\n\n%s\n%s\n%s\n\n", fence, e, fence)
 		}
 		if rep := strings.TrimSpace(f.Report); rep != "" {
 			b.WriteString("**详细报告：**\n\n")
@@ -108,7 +109,8 @@ func SingleFindingMarkdown(f *db.DBFinding, generatedAt time.Time) string {
 		fmt.Fprintf(&b, "## 概述\n\n%s\n\n", s)
 	}
 	if e := strings.TrimSpace(f.Evidence); e != "" {
-		fmt.Fprintf(&b, "## 证据\n\n```\n%s\n```\n\n", e)
+		fence := fenceFor(e)
+		fmt.Fprintf(&b, "## 证据\n\n%s\n%s\n%s\n\n", fence, e, fence)
 	}
 	if rep := strings.TrimSpace(f.Report); rep != "" {
 		b.WriteString("## 详细报告\n\n")

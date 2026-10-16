@@ -83,7 +83,8 @@ func Markdown(in Input) string {
 			fmt.Fprintf(&b, "### %d. [%s] %s\n\n", i+1, strings.ToUpper(nz(f.Severity, "info")), nz(f.Name, nz(f.VulnClass, "未分类")))
 			fmt.Fprintf(&b, "%s\n\n", nz(f.Summary, ""))
 			if f.PoC != "" {
-				fmt.Fprintf(&b, "**PoC / 证据：**\n\n```\n%s\n```\n\n", f.PoC)
+				fence := fenceFor(f.PoC)
+				fmt.Fprintf(&b, "**PoC / 证据：**\n\n%s\n%s\n%s\n\n", fence, f.PoC, fence)
 			}
 		}
 	}
@@ -96,4 +97,24 @@ func nz(s, d string) string {
 		return d
 	}
 	return s
+}
+
+// fenceFor 返回一段严格长于 s 内任何反引号连续串的围栏（CommonMark 加固写法），
+// 保证不可信的证据/PoC 文本无法提前闭合代码块、向报告注入 Markdown 结构。
+func fenceFor(s string) string {
+	maxRun, n := 2, 0
+	for _, c := range s {
+		if c == '`' {
+			n++
+			continue
+		}
+		if n > maxRun {
+			maxRun = n
+		}
+		n = 0
+	}
+	if n > maxRun {
+		maxRun = n
+	}
+	return strings.Repeat("`", maxRun+1)
 }
