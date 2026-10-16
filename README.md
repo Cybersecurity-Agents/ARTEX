@@ -36,28 +36,28 @@
 > 完整交互见[在线 Demo](https://artex-demo.mhtsec.com)。
 
 | 仪表盘（总览 / Token 消耗 / 活动流） | 任务列表 |
-| :----------------------: | :--: |
-|            仪表盘           |  任务  |
+| :---: | :---: |
+| ![仪表盘](screenshots/dashboard.png) | ![任务](screenshots/tasks.png) |
 
 | 任务 · 执行过程（会话 / 工具调用） | 探索链路 |
-| :------------------: | :--: |
-|         执行过程         | 探索链路 |
+| :---: | :---: |
+| ![执行过程](screenshots/sessions.png) | ![探索链路](screenshots/graph.png) |
 
-|  发现 |  资产 |
-| :-: | :-: |
-|  发现 |  资产 |
+| 发现 | 资产 |
+| :---: | :---: |
+| ![发现](screenshots/findings.png) | ![资产](screenshots/assets.png) |
 
 | 流量录制 | 人在环路对话 |
-| :--: | :----: |
-|  流量  |   对话   |
+| :---: | :---: |
+| ![流量](screenshots/traffic.png) | ![对话](screenshots/chat.png) |
 
 | Agent 管理 | LLM 配置 |
-| :------: | :----: |
-|   Agent  |   LLM  |
+| :---: | :---: |
+| ![Agent](screenshots/agents.png) | ![LLM](screenshots/llm.png) |
 
 | 拦截审批 | 后端日志 |
-| :--: | :--: |
-|  拦截  |  日志  |
+| :---: | :---: |
+| ![拦截](screenshots/intercept.png) | ![日志](screenshots/logs.png) |
 
 ---
 
